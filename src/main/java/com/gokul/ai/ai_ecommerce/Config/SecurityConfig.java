@@ -28,6 +28,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/auth/register", "/auth/login").permitAll()
+                .requestMatchers("/products/**").permitAll()
                 .anyRequest().authenticated()
         );
 
