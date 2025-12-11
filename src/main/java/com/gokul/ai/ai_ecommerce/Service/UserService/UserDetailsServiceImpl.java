@@ -1,4 +1,4 @@
-package com.gokul.ai.ai_ecommerce.Service;
+package com.gokul.ai.ai_ecommerce.Service.UserService;
 
 import com.gokul.ai.ai_ecommerce.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;

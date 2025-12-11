@@ -1,12 +1,10 @@
-package com.gokul.ai.ai_ecommerce.Service.Impl;
+package com.gokul.ai.ai_ecommerce.Service.UserService;
 
 import com.gokul.ai.ai_ecommerce.Dto.*;
 import com.gokul.ai.ai_ecommerce.model.*;
 import com.gokul.ai.ai_ecommerce.Repository.*;
 import com.gokul.ai.ai_ecommerce.Security.JwtUtil;
-import com.gokul.ai.ai_ecommerce.Service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -43,14 +41,29 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(LoginDto dto) {
-        var user = userRepository.findByEmail(dto.getEmail());
+        var userOpt = userRepository.findByEmail(dto.getEmail());
 
-        if (user.isEmpty()) return "Invalid credentials";
+        if (userOpt.isEmpty()) return "Invalid credentials";
 
-        if (!encoder.matches(dto.getPassword(), user.get().getPassword()))
+        User user = userOpt.get();
+
+        if (!encoder.matches(dto.getPassword(), user.getPassword())) {
             return "Invalid credentials";
+        }
 
-        return jwtUtil.generateToken(dto.getEmail());
+        // Convert your User into Spring Security UserDetails
+        org.springframework.security.core.userdetails.UserDetails userDetails =
+                org.springframework.security.core.userdetails.User.builder()
+                        .username(user.getEmail())
+                        .password(user.getPassword())
+                        .authorities(user.getRoles().stream()
+                                .map(Role::getName)
+                                .toArray(String[]::new))
+                        .build();
+
+        // Generate token using UserDetails
+        return jwtUtil.generateToken(userDetails);
     }
+
 }
 

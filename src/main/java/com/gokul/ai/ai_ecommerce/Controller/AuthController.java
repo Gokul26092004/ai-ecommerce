@@ -2,7 +2,7 @@ package com.gokul.ai.ai_ecommerce.Controller;
 
 
 import com.gokul.ai.ai_ecommerce.Dto.*;
-import com.gokul.ai.ai_ecommerce.Service.UserService;
+import com.gokul.ai.ai_ecommerce.Service.UserService.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
