@@ -51,19 +51,22 @@ public class UserServiceImpl implements UserService {
             return "Invalid credentials";
         }
 
-        // Convert your User into Spring Security UserDetails
+        // Convert User into UserDetails
         org.springframework.security.core.userdetails.UserDetails userDetails =
                 org.springframework.security.core.userdetails.User.builder()
                         .username(user.getEmail())
                         .password(user.getPassword())
-                        .authorities(user.getRoles().stream()
-                                .map(Role::getName)
-                                .toArray(String[]::new))
+                        .authorities(
+                                user.getRoles().stream()
+                                        .map(Role::getName)
+                                        .toArray(String[]::new)
+                        )
                         .build();
 
-        // Generate token using UserDetails
-        return jwtUtil.generateToken(userDetails);
+        // 🔥 Pass BOTH userDetails AND userId
+        return jwtUtil.generateToken(userDetails, user.getId());
     }
+
 
 }
 
