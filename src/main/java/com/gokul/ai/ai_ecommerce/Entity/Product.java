@@ -18,6 +18,8 @@ public class Product {
     private String description;
     private double price;
 
+    private double rating = 0.0;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
