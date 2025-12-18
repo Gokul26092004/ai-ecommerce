@@ -6,6 +6,10 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import Products from "./pages/products";
 import ProductDetail from "./pages/ProductDetail";
+import Cart from "./pages/cart"
+import Orders from "./pages/orders"
+import Checkout from "./pages/checkout"
+
 import './App.css';
 
 function App() {
@@ -19,6 +23,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/orders" element={<Orders />} />
       </Routes>
     </Router>
 
