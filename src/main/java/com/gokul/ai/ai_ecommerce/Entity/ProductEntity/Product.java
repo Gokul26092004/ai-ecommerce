@@ -1,4 +1,4 @@
-package com.gokul.ai.ai_ecommerce.Entity;
+package com.gokul.ai.ai_ecommerce.Entity.ProductEntity;
 
 import jakarta.persistence.*;
 import lombok.*;

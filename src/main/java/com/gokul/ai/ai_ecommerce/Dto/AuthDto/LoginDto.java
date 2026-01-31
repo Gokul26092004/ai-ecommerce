@@ -1,4 +1,4 @@
-package com.gokul.ai.ai_ecommerce.Dto;
+package com.gokul.ai.ai_ecommerce.Dto.AuthDto;
 
 import lombok.Data;
 

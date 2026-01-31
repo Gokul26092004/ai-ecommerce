@@ -2,7 +2,7 @@ package com.gokul.ai.ai_ecommerce.Controller;
 
 
 import com.gokul.ai.ai_ecommerce.Entity.CartEntity.Cart;
-import com.gokul.ai.ai_ecommerce.Service.Cart.CartService;
+import com.gokul.ai.ai_ecommerce.Service.CartService.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,7 +1,8 @@
 package com.gokul.ai.ai_ecommerce.Service.UserService;
 
 
-import com.gokul.ai.ai_ecommerce.Dto.*;
+import com.gokul.ai.ai_ecommerce.Dto.AuthDto.LoginDto;
+import com.gokul.ai.ai_ecommerce.Dto.AuthDto.RegisterDto;
 
 public interface UserService {
     String register(RegisterDto dto);

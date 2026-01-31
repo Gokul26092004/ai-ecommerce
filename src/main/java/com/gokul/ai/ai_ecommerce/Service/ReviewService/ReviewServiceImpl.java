@@ -1,7 +1,7 @@
 package com.gokul.ai.ai_ecommerce.Service.ReviewService;
 
 import com.gokul.ai.ai_ecommerce.Dto.ReviewDto.AddReviewDto;
-import com.gokul.ai.ai_ecommerce.Entity.Product;
+import com.gokul.ai.ai_ecommerce.Entity.ProductEntity.Product;
 import com.gokul.ai.ai_ecommerce.Entity.ReviewEntity.Review;
 import com.gokul.ai.ai_ecommerce.Repository.ProductRepository;
 import com.gokul.ai.ai_ecommerce.Repository.ReviewRepository;

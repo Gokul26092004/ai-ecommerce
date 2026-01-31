@@ -1,6 +1,7 @@
 package com.gokul.ai.ai_ecommerce.Service.UserService;
 
-import com.gokul.ai.ai_ecommerce.Dto.*;
+import com.gokul.ai.ai_ecommerce.Dto.AuthDto.LoginDto;
+import com.gokul.ai.ai_ecommerce.Dto.AuthDto.RegisterDto;
 import com.gokul.ai.ai_ecommerce.model.*;
 import com.gokul.ai.ai_ecommerce.Repository.*;
 import com.gokul.ai.ai_ecommerce.Security.JwtUtil;

@@ -1,6 +1,6 @@
 package com.gokul.ai.ai_ecommerce.Service.ProductService;
 
-import com.gokul.ai.ai_ecommerce.Entity.Product;
+import com.gokul.ai.ai_ecommerce.Entity.ProductEntity.Product;
 
 import java.util.List;
 

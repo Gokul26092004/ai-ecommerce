@@ -1,12 +1,10 @@
-package com.gokul.ai.ai_ecommerce.Service.Cart;
+package com.gokul.ai.ai_ecommerce.Service.CartService;
 
 
 import com.gokul.ai.ai_ecommerce.Entity.CartEntity.Cart;
 import com.gokul.ai.ai_ecommerce.Entity.CartEntity.CartItem;
 import com.gokul.ai.ai_ecommerce.Repository.Cart.CartItemRepository;
 import com.gokul.ai.ai_ecommerce.Repository.Cart.CartRepository;
-import com.gokul.ai.ai_ecommerce.model.*;
-import com.gokul.ai.ai_ecommerce.Repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

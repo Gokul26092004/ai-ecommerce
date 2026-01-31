@@ -5,7 +5,7 @@ import com.gokul.ai.ai_ecommerce.Dto.PlaceOrderDto.PlaceOrderDto;
 import com.gokul.ai.ai_ecommerce.Entity.OderEntity.Order;
 import com.gokul.ai.ai_ecommerce.Entity.OderEntity.OrderItem;
 import com.gokul.ai.ai_ecommerce.Entity.OderEntity.OrderStatus;
-import com.gokul.ai.ai_ecommerce.Entity.Product;
+import com.gokul.ai.ai_ecommerce.Entity.ProductEntity.Product;
 import com.gokul.ai.ai_ecommerce.Repository.OrderRepository;
 import com.gokul.ai.ai_ecommerce.Repository.ProductRepository;
 import lombok.RequiredArgsConstructor;

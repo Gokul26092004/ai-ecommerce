@@ -1,6 +1,6 @@
 package com.gokul.ai.ai_ecommerce.Entity.ReviewEntity;
 
-import com.gokul.ai.ai_ecommerce.Entity.Product;
+import com.gokul.ai.ai_ecommerce.Entity.ProductEntity.Product;
 import com.gokul.ai.ai_ecommerce.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
