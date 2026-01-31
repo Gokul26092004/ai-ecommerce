@@ -1,0 +1,9 @@
+<button onclick="getRecommendations(1)">View Product</button>
+
+<script>
+function getRecommendations(id) {
+    fetch(`http://localhost:8080/api/recommend/${id}`)
+        .then(res => res.json())
+        .then(data => console.log(data));
+}
+</script>
