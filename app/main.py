@@ -1,6 +1,9 @@
-from fastapi import FastAPI
+import shutil
+
+from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from app.schemas.request import RecommendRequest, SearchRequest, SentimentRequest
+from app.services.visual_search_service import search_similar
 
 app = FastAPI(title="AI microservice")
 
@@ -27,3 +30,14 @@ def search(req: SearchRequest):
 @app.post("/sentiment")
 def sentiment(req:SentimentRequest):
     return {"sentiment":"POSITIVE"}
+
+@app.post("/visual-search")
+async def visual_search(file: UploadFile = File(...)):
+    file_location = "data/query.jpg"
+
+    with open(file_location, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    results = search_similar(file_location)
+
+    return {"similar_products": results}
