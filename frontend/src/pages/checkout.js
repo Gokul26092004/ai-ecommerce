@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCart } from "../utils/cartUtils";
 import { placeOrder } from "../utils/orderUtils";
@@ -10,11 +10,9 @@ const Checkout = () => {
   const [address, setAddress] = useState("");
   const [payment, setPayment] = useState("COD");
 
-  import('react').then(React => {
-    React.useEffect(() => {
-        getCart().then(data => setCartItems(data.items || []));
-    }, []);
-  });
+  useEffect(() => {
+    getCart().then(data => setCartItems(data.items || []));
+  }, []);
 
   const handleOrder = async () => {
     if (!address) {
