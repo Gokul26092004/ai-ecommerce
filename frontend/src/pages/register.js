@@ -16,7 +16,7 @@ const Register = () => {
     }
 
     try {
-      const response = await api.post("/register", { name, email, password });
+      const response = await api.post("/auth/register", { name, email, password });
       alert(response.data || "User registered successfully");
     } catch (error) {
       alert(error.response?.data || "Registration failed");

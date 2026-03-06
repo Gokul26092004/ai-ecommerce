@@ -10,7 +10,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await api.post("/login", { email, password });
+      const response = await api.post("/auth/login", { email, password });
 
       // Assuming your backend returns { message: "User logged in", token: "..." }
       alert(response.data.message || "Login successful");

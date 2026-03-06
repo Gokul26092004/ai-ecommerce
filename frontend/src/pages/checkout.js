@@ -4,21 +4,31 @@ import { getCart } from "../utils/cartUtils";
 import { placeOrder } from "../utils/orderUtils";
 
 const Checkout = () => {
-  const cart = getCart();
+  const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
 
   const [address, setAddress] = useState("");
   const [payment, setPayment] = useState("COD");
 
-  const handleOrder = () => {
+  import('react').then(React => {
+    React.useEffect(() => {
+        getCart().then(data => setCartItems(data.items || []));
+    }, []);
+  });
+
+  const handleOrder = async () => {
     if (!address) {
       alert("Please enter delivery address");
       return;
     }
 
-    placeOrder(cart, address, payment);
-    alert("Order placed successfully!");
-    navigate("/orders");
+    try {
+        await placeOrder(cartItems, address, payment);
+        alert("Order placed successfully!");
+        navigate("/orders");
+    } catch (e) {
+        alert("Failed to place order. Try again.");
+    }
   };
 
   return (

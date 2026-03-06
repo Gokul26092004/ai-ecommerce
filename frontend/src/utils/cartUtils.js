@@ -1,30 +1,51 @@
-export const getCart = () => {
-  const cart = localStorage.getItem("cart");
-  return cart ? JSON.parse(cart) : [];
+import api from "../services/api";
+
+export const getUserId = () => {
+    const token = localStorage.getItem("token");
+    if (!token) return null;
+    try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        return payload.userId || null;
+    } catch(e) { return null; }
 };
 
-export const addToCart = (product) => {
-  const cart = getCart();
-  const existing = cart.find((item) => item.id === product.id);
-
-  if (existing) {
-    existing.quantity += 1;
-  } else {
-    cart.push({ ...product, quantity: 1 });
-  }
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert("Product added to cart");
+export const getCart = async () => {
+    const userId = getUserId();
+    if (!userId) return [];
+    try {
+        const response = await api.get(`/cart/${userId}`);
+        return response.data; // Expected to be Cart object, adjust if it's Cart with items array
+    } catch(e) {
+        return [];
+    }
 };
 
-export const updateQuantity = (id, qty) => {
-  const cart = getCart().map((item) =>
-    item.id === id ? { ...item, quantity: qty } : item
-  );
-  localStorage.setItem("cart", JSON.stringify(cart));
+export const addToCart = async (product) => {
+    const userId = getUserId();
+    if (!userId) {
+        alert("Please login to add to cart");
+        return;
+    }
+    try {
+        await api.post(`/cart/add?userId=${userId}&productId=${product.id}&qty=1`);
+        alert("Product added to cart");
+    } catch (e) {
+        alert("Failed to add to cart");
+    }
 };
 
-export const removeFromCart = (id) => {
-  const cart = getCart().filter((item) => item.id !== id);
-  localStorage.setItem("cart", JSON.stringify(cart));
+export const updateQuantity = async (itemId, qty) => {
+    try {
+        await api.put(`/cart/update/${itemId}?qty=${qty}`);
+    } catch (e) {
+        console.error("Failed to update qty");
+    }
+};
+
+export const removeFromCart = async (itemId) => {
+    try {
+        await api.delete(`/cart/remove/${itemId}`);
+    } catch (e) {
+        console.error("Failed to remove item");
+    }
 };

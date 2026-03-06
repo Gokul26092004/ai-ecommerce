@@ -1,26 +1,36 @@
 import { Link } from "react-router-dom";
 import { getCart, updateQuantity, removeFromCart } from "../utils/cartUtils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Cart = () => {
-  const [cart, setCart] = useState(getCart());
+  const [cartItems, setCartItems] = useState([]);
 
-  const handleQtyChange = (id, qty) => {
-    updateQuantity(id, qty);
-    setCart(getCart());
+  const fetchCart = async () => {
+    const cartData = await getCart();
+    setCartItems(cartData.items || []);
   };
 
-  const handleRemove = (id) => {
-    removeFromCart(id);
-    setCart(getCart());
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
+  const handleQtyChange = async (itemId, qty) => {
+    if (qty < 1) return;
+    await updateQuantity(itemId, qty);
+    await fetchCart();
   };
 
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+  const handleRemove = async (itemId) => {
+    await removeFromCart(itemId);
+    await fetchCart();
+  };
+
+  const total = cartItems.reduce(
+    (sum, item) => sum + (item.product?.price || 0) * item.quantity,
     0
   );
 
-  if (cart.length === 0) {
+  if (cartItems.length === 0) {
     return (
       <div className="text-center mt-10">
         <h2 className="text-2xl font-bold">Your cart is empty</h2>
@@ -36,14 +46,14 @@ const Cart = () => {
       <h1 className="text-3xl font-bold text-center mb-6">Your Cart</h1>
 
       <div className="max-w-3xl mx-auto bg-white p-4 rounded shadow">
-        {cart.map((item) => (
+        {cartItems.map((item) => (
           <div
             key={item.id}
             className="flex justify-between items-center border-b py-3"
           >
             <div>
-              <h3 className="font-semibold">{item.name}</h3>
-              <p>₹ {item.price}</p>
+              <h3 className="font-semibold">{item.product?.name || "Unknown Product"}</h3>
+              <p>₹ {item.product?.price || 0}</p>
             </div>
 
             <div className="flex items-center gap-2">

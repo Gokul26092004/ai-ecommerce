@@ -1,43 +1,28 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { addToCart } from "../utils/cartUtils";
-
-
-
-const sampleProducts = [
-  {
-    id: 1,
-    name: "iPhone 15",
-    price: 79999,
-    category: "Mobile",
-    image: "https://via.placeholder.com/300",
-    description: "Latest Apple smartphone",
-  },
-  {
-    id: 2,
-    name: "Samsung Galaxy S23",
-    price: 69999,
-    category: "Mobile",
-    image: "https://via.placeholder.com/300",
-    description: "Powerful Android phone",
-  },
-  {
-    id: 3,
-    name: "Dell XPS Laptop",
-    price: 99999,
-    category: "Laptop",
-    image: "https://via.placeholder.com/300",
-    description: "High performance laptop",
-  },
-];
+import api from "../services/api";
 
 const Products = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [sort, setSort] = useState("");
+  const [productsData, setProductsData] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await api.get("/products/all");
+        setProductsData(response.data);
+      } catch (error) {
+        console.error("Failed to fetch products", error);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const filteredProducts = useMemo(() => {
-    let products = [...sampleProducts];
+    let products = [...productsData];
 
     if (search) {
       products = products.filter((p) =>

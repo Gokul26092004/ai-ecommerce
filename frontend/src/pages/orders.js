@@ -1,7 +1,12 @@
 import { getOrders } from "../utils/orderUtils";
+import { useState, useEffect } from "react";
 
 const Orders = () => {
-  const orders = getOrders();
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    getOrders().then(setOrders);
+  }, []);
 
   if (orders.length === 0) {
     return <h2 className="text-center mt-10">No orders placed yet</h2>;
