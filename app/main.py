@@ -31,13 +31,22 @@ def search(req: SearchRequest):
 def sentiment(req:SentimentRequest):
     return {"sentiment":"POSITIVE"}
 
+import uuid
+import os
+
 @app.post("/visual-search")
 async def visual_search(file: UploadFile = File(...)):
-    file_location = "data/query.jpg"
+    unique_filename = f"query_{uuid.uuid4().hex}.jpg"
+    file_location = os.path.join("data", unique_filename)
+    os.makedirs("data", exist_ok=True)
 
     with open(file_location, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
     results = search_similar(file_location)
+
+    # Clean up the file after search to save space
+    if os.path.exists(file_location):
+        os.remove(file_location)
 
     return {"similar_products": results}

@@ -29,7 +29,9 @@ def extract_features(image_path):
     return features.numpy().flatten()
 
 
-# Index dataset images
+from functools import lru_cache
+
+@lru_cache(maxsize=1)
 def index_images():
     features = []
     paths = []
