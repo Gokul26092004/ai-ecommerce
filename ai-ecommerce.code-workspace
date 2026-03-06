@@ -1,0 +1,20 @@
+{
+    "folders": [
+        {
+            "name": "Backend (Spring Boot)",
+            "path": "backend_repo"
+        },
+        {
+            "name": "Frontend (React)",
+            "path": "frontend_repo/frontend"
+        },
+        {
+            "name": "AI Service (FastAPI)",
+            "path": "."
+        }
+    ],
+    "settings": {
+        "java.compile.nullAnalysis.mode": "automatic",
+        "java.configuration.updateBuildConfiguration": "automatic"
+    }
+}

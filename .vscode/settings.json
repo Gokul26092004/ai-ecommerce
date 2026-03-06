@@ -1,3 +1,13 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic"
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.project.sourcePaths": [],
+    "java.import.exclusions": [
+        "**/node_modules/**",
+        "**/.metadata/**",
+        "**/archetype-resources/**",
+        "**/META-INF/maven/**",
+        "**/frontend_repo/**",
+        "**/main_repo/**"
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"
 }
